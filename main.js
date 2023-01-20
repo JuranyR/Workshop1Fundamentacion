@@ -1,63 +1,67 @@
-const URL_API = 'https://pokeapi.co/api/v2/pokemon';
+const URL_API = 'https://pokeapi.co/api/v2/pokemon/';
 
-const listPokemons = [];
+const getPokemons = async (namePokemon) => {
+    const response = await axios.get (URL_API+namePokemon);
+    const dataPokemon = response.data
+    const cardPokemon = document.getElementById ('dataPokemon');
+    const abilities = [];
+    dataPokemon.abilities.forEach(element => {
+        abilities.push(element.ability.name)
+    });
+    const types = [];
+    dataPokemon.types.forEach(element => {
+        types.push(element.type.name)
+    });
 
-const getPokemons = async () => {
-  const response = await axios.get(URL_API);
-  const dataPokemon = response.data;
-  const newPokemon = {
-    name: pokemom.name,
-    image: dataPokemon.data.sprites.front_default,
-    weight: dataPokemon.data.weight,
-    height: dataPokemon.data.height,
-    experience: dataPokemon.data.base_experience,
-    abilities: dataPokemon.data.abilities,
-  };
-};
+    cardPokemon.innerHTML='';
+    cardPokemon.innerHTML+= `
+        <div class="left">
+            <span>
+                <h2>
+                    ${dataPokemon.name.toUpperCase()}
+                </h2>
+            </span>
+            <figure>
+                <img src="${dataPokemon.sprites.front_default}" alt="${dataPokemon.name}">
+            </figure>
+        </div>
+        <div class="right">
+            <div class="right-colum1">
+                <span>No.</span>
+                <span>${dataPokemon.order}</span>
+            </div>
+            <div class="right-colum2">
+                <span>LEVEL</span>
+                <span>${dataPokemon.base_experience}</span>
+            </div>
+            <div class="right-colum1">
+                <span>TYPE</span>
+                <span>${types.toString()}</span>
+            </div>
+            <div class="right-colum2">
+                <span>HABILITY</span>
+                <span>${abilities.toString()}</span>
+            </div>
+            <div class="right-colum1">
+                <span>HEIGHT</span>
+                <span>${dataPokemon.height} m</span>
+            </div>
+            <div class="right-colum2">
+                <span>WEIGHT</span>
+                <span>${dataPokemon.weight} Kg</span>
+            </div>
+        </div>
+    `
+}
 
-// render cards
-const containerM = document.querySelector('#dataPokemon');
+getPokemons('charizard')
 
-const renderPokemons = (arrayPokemons) => {
-  containerM.innerHTML = '';
-  arrayPokemons.forEach((pokemon) => {
-    containerM.innerHTML += `
-  <div class="left">
-    <span>
-      <h2>CHARIZARD</h2>
-      <img
-      class="imgCard"
-      src="${(pokemon, image)}"
-      alt="Charizard"
-    />
-    </span>
-    <figure></figure>
-  </div>
-  <div class="right">
-    <div class="right-colum1">
-      <span>No.</span>
-      <span>007</span>
-    </div>
-    <div class="right-colum2">
-      <span>LEVEL</span>
-      <span>1700</span>
-    </div>
-    <div class="right-colum1">
-      <span>TYPE</span>
-      <span>FIRE</span>
-    </div>
-    <div class="right-colum2">
-      <span>HABILITY</span>
-      <span>FLAMES</span>
-    </div>
-    <div class="right-colum1">
-      <span>HEIGHT</span>
-      <span>90,5 Kg</span>
-    </div>
-    <div class="right-colum2">
-      <span>WEIGHT</span>
-      <span>1,7 m</span>
-    </div>
-  </div>`;
-  });
-};
+const getListenerHTML = (idHTML, namePokemon) => {
+    document.getElementById(idHTML).addEventListener('click', ()=>getPokemons(namePokemon));
+}
+
+getListenerHTML('pokeSquatter', 'squirtle');
+getListenerHTML('pokeNN', 'mewtwo');
+getListenerHTML('pokeSharmander', 'charmander');
+getListenerHTML('pokeRattata', 'rattata');
+
