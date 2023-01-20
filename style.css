@@ -1,0 +1,167 @@
+:root {
+    --ligthGray: #E3DFDE;
+    --purple: #9350B1;
+    --ligthPurple: #F8E4F5;
+}
+
+body{
+    background-color: var(--ligthGray);
+    position: relative;
+    height: 100vh;
+    margin: 15px;
+}
+
+.encabezado {
+    background-color: var(--purple);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 15px 15px 0 0;
+}
+
+.encabezado figure img {
+    width: 50px;
+}
+
+.encabezado h1 {
+    color: white;
+    text-transform: uppercase;
+}
+main {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap:20px;
+    background-color: var(--ligthPurple);
+    height: 62%;
+}
+.charizard-baby{
+    margin: 0;
+}
+.pokeball{
+    margin: 0;
+}
+
+.left figure{
+    display: flex;
+    justify-content: end;
+}
+.left span {
+    margin-right: 40px;
+    display: flex;
+    justify-content: end;
+    text-align: center;
+}
+
+.left h2 {
+    background-color: #fff;
+    padding: 5px 20px;
+    border-radius: 8px;
+    min-width: 280px;
+}
+
+main img {
+    max-width: 300px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+main .right{
+    display: flex;
+    margin: 20px 0px 20px;
+    max-width: 300px;
+    background-color: #fff;
+
+    font-weight: 600;
+    padding: 25px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.right-colum1,.right-colum2 {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    background-color: white;
+    border-radius:  0 0 10px 10px;
+    flex-wrap: wrap;
+    bottom: 0;
+    position: absolute;
+}
+
+footer h3 {
+    display: flex;
+    align-items: center;
+}
+footer img{
+    max-width: 80px;
+    border-radius: 10px;
+}
+footer figure:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+
+@media (max-width: 800px) {
+    header {
+        justify-content: center;
+    }
+    main{
+        grid-template-columns: none;
+        justify-content: center;    
+        gap:unset;
+        height: unset;
+    }
+    main .left{
+        z-index: 1;
+        position: relative;
+        width: 100%;
+    }
+    .left span{
+        justify-content: center;
+        width: 100%;
+    }
+    main .left img{
+        width: 100%;
+    }
+    main .left h2{
+       min-width: 10px;
+    }
+    main .right{
+        margin: -100px auto 20px;
+        padding-top: 120px;
+    }
+    .right-colum1,.right-colum2 {
+        width: 100%;
+        flex-direction: row;
+        margin: 25px;
+    }
+    .right-colum1 span, .right-colum2 span{
+        justify-content: flex-start;
+        width: 50%;
+        display: flex;
+        padding-left: 20px;
+    }
+    footer h3{
+        width: 100%;
+        justify-content: center;
+    }
+    footer{
+        bottom: unset;
+        position: unset;
+    }
+}
+
+@media (max-width: 400px) {
+    .right-colum1 span, .right-colum2 span{
+        padding-left: 0px;
+    }
+}
