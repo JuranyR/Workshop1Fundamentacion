@@ -1,20 +1,20 @@
 const URL_API = 'https://pokeapi.co/api/v2/pokemon/';
 
 const getPokemons = async (namePokemon) => {
-    const response = await axios.get (URL_API+namePokemon);
-    const dataPokemon = response.data
-    const cardPokemon = document.getElementById ('dataPokemon');
-    const abilities = [];
-    dataPokemon.abilities.forEach(element => {
-        abilities.push(element.ability.name)
-    });
-    const types = [];
-    dataPokemon.types.forEach(element => {
-        types.push(element.type.name)
-    });
+  const response = await axios.get(URL_API + namePokemon);
+  const dataPokemon = response.data;
+  const cardPokemon = document.getElementById('dataPokemon');
+  const abilities = [];
+  dataPokemon.abilities.forEach((element) => {
+    abilities.push(element.ability.name);
+  });
+  const types = [];
+  dataPokemon.types.forEach((element) => {
+    types.push(element.type.name);
+  });
 
-    cardPokemon.innerHTML='';
-    cardPokemon.innerHTML+= `
+  cardPokemon.innerHTML = '';
+  cardPokemon.innerHTML += `
         <div class="left">
             <span>
                 <h2>
@@ -22,7 +22,9 @@ const getPokemons = async (namePokemon) => {
                 </h2>
             </span>
             <figure>
-                <img src="${dataPokemon.sprites.front_default}" alt="${dataPokemon.name}">
+                <img src="${dataPokemon.sprites.front_default}" alt="${
+    dataPokemon.name
+  }">
             </figure>
         </div>
         <div class="right">
@@ -51,17 +53,33 @@ const getPokemons = async (namePokemon) => {
                 <span>${dataPokemon.weight} Kg</span>
             </div>
         </div>
-    `
-}
+    `;
+};
 
-getPokemons('charizard')
+getPokemons('charizard');
 
 const getListenerHTML = (idHTML, namePokemon) => {
-    document.getElementById(idHTML).addEventListener('click', ()=>getPokemons(namePokemon));
-}
+  document
+    .getElementById(idHTML)
+    .addEventListener('click', () => getPokemons(namePokemon));
+};
 
 getListenerHTML('pokeSquatter', 'squirtle');
 getListenerHTML('pokeNN', 'mewtwo');
 getListenerHTML('pokeSharmander', 'charmander');
 getListenerHTML('pokeRattata', 'rattata');
 
+//filtro de buscador
+
+const search = document.querySelector('.form__search');
+
+search.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const inputSearch = document.querySelector('#inputSearch');
+  const searchTerm = inputSearch.value;
+  try {
+    await getPokemons(searchTerm);
+  } catch (error) {
+    alert('Pokemon No Encontrado');
+  }
+});
