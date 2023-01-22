@@ -76,7 +76,7 @@ const search = document.querySelector('.form__search');
 search.addEventListener('submit', async (event) => {
   event.preventDefault();
   const inputSearch = document.querySelector('#inputSearch');
-  const searchTerm = inputSearch.value;
+  const searchTerm = inputSearch.value.toLowerCase();
   try {
     await getPokemons(searchTerm);
   } catch (error) {
